@@ -109,8 +109,8 @@ int main(){
                 orientation = 3; /* 3 is rotated left*/
                 //printf("Setting orientation to left\n");
             }else{
-                printf("error with accelerometer data...something unexpected happened\n");
-                return 0;
+                //printf("could not find accelerometer data, setting orientation to normal\n");
+                orientation = 0;
             }
 
             /*actually put the data into the arrays*/

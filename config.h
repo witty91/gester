@@ -3,7 +3,7 @@
         /*path to the input event, need to be part of input group in order to read*/
         char devname[] = "/dev/input/by-id/usb-Wacom_Co._Ltd._Pen_and_multitouch_sensor-event-if00";
         /*path to accelerometer data*/
-        std::string accelpath = "/sys/devices/pci0000:00/0000:00:13.0/{33AECD58-B679-4E54-9BD9-A04D34F0C226}/001F:8087:0AC2.0003/HID-SENSOR-200073.8.auto/"; //in there the program looks for a folder named iio:device0 or 1
+        std::string accelpath = "/sys/bus/iio/devices/"; //in there the program looks for a folder named iio:device0 or 1
         std::string xrawdata = "in_accel_x_raw"; // in iio:device* there should be these files with the respective data
         std::string yrawdata = "in_accel_y_raw";
         /*maximum values x and y coordinate can have, usually bottom right of screen and can be found using evtest on the input device*/
