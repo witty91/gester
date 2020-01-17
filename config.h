@@ -15,8 +15,13 @@
         int anglescaling = 2;
         /*another value to set the stepsize for rotations*/
         int anglestepping = 5;
-        /*how much the com may move for a rotation*/
+        /*how much the center of the imagined circle may move for a rotation*/
         int comdisttolerance = 200;
+        /*offset from the edge where a swipe is still an edge swipe*/
+        int offsetbottom = 10;
+        int offsettop = 10;
+        int offsetleft = 10;
+        int offsetright = 10;
         /*an array of commands to use within the program*/
         char* commands[] = {
             "onboard &", /*1 finger from bottom*/

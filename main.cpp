@@ -358,19 +358,19 @@ int main(){
 
                     if(nfingers == 1){
                         /*one finger screen edge gestures*/
-                        if(y0first >= (ymax - 10) && finger0directionality < 1){
+                        if(y0first >= (ymax - offsetbottom) && finger0directionality < 1){
                             printf("swipe from bottom!\n");
                             system(commands[0]);
                         }
-                        if(y0first <= 10 && finger0directionality < 1){
+                        if(y0first <= offsettop && finger0directionality < 1){
                             printf("swipe from top!\n");
                             system(commands[1]);
                         }
-                        if(x0first >= (xmax - 10) && finger0directionality > 1){
+                        if(x0first >= (xmax - offsetright) && finger0directionality > 1){
                             printf("swipe from right!\n");
                             system(commands[2]);
                         }
-                        if(x0first <= 10 && finger0directionality > 1){
+                        if(x0first <= offsetleft && finger0directionality > 1){
                             printf("swipe from left!\n");
                             system(commands[3]);
                         }
@@ -417,6 +417,7 @@ int main(){
 
                         }
                         else if(comdist < comdisttolerance){
+                                printf("Two finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                                 if(angleavg < 0){
                                     std::string tmpcommand = commands[8] + std::to_string(anglescaled);
 				    system(tmpcommand.c_str());
@@ -424,7 +425,6 @@ int main(){
                                     std::string tmpcommand = commands[9] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }
-                           // printf("I think this is a two finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                         }
                     }
                     else if(nfingers == 3){
@@ -472,6 +472,7 @@ int main(){
                             }
                         }
                         else if(comdist < comdisttolerance){
+                            printf("Three finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
                                     std::string tmpcommand = commands[14] + std::to_string(abs(anglescaled));
                                     system(tmpcommand.c_str());
@@ -479,7 +480,6 @@ int main(){
                                     std::string tmpcommand = commands[15] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }
-                            //printf("I think this is a three finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                         }
                     }
                     else if(nfingers == 4){
@@ -532,6 +532,7 @@ int main(){
                             }
                         }
                         else if(comdist < comdisttolerance){
+                            printf("Four finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
                                 std::string tmpcommand = commands[20] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
@@ -596,6 +597,7 @@ int main(){
                             }
                         }
                         else if(comdist < comdisttolerance){
+                            printf("Five finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
                                 std::string tmpcommand = commands[26] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
