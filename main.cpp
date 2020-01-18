@@ -462,11 +462,11 @@ int main(){
                                 printf("3 finger swipe up!\n");
                                 system(commands[11]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first){
                                 printf("3 finger swipe right!\n");
                                 system(commands[12]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first){
                                 printf("3 finger swipe left!\n");
                                 system(commands[13]);
                             }
@@ -522,11 +522,11 @@ int main(){
                                 printf("4 finger swipe up!\n");
                                 system(commands[17]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first && x3last > x3first){
                                 printf("4 finger swipe right!\n");
                                 system(commands[18]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first && x3last < x3first){
                                 printf("4 finger swipe left!\n");
                                 system(commands[19]);
                             }
@@ -587,11 +587,11 @@ int main(){
                                 printf("5 finger swipe up!\n");
                                 system(commands[23]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first && x3last > x3first){
                                 printf("5 finger swipe right!\n");
                                 system(commands[24]);
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first && x3last < x3first){
                                 printf("5 finger swipe left!\n");
                                 system(commands[25]);
                             }
