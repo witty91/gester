@@ -13,7 +13,7 @@ When everything is configured correctly one can just run the commands ```make```
 
 # supported gestures
 Currently the following gestures have been implemented:
-* 1 finger swipes from top, bottom, left and right
+* 1-5 finger swipes from top, bottom, left and right edges of the screen
 * 2-5 finger swipes up, down, left and right
 * 2-5 finger rotations clockwise and counterclockwise
 

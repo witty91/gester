@@ -28,24 +28,40 @@
             "dmenu_run &", /*1 finger from top*/
             "", /*1 finger from right*/
             "stabbed &", /*1 finger from left*/
+            "", /*2 finger swipe from bottom*/
+            "", /*2 finger swipe from top*/
+            "", /*2 finger swipe from right*/
+            "", /*2 finger swipe from left*/
             "", /*2 finger swipe down*/
             "", /*2 finger swipe up*/
             "xdotool key super+2", /*2 finger swipe right*/
             "xdotool key super+1", /*2 finger swipe left*/
             "/home/christopher/bin/changevolume ", /*2 finger rotation left*/
             "/home/christopher/bin/changevolume ", /*2finger rotation right*/
+            "", /*3 finger swipe from bottom*/
+            "", /*3 finger swipe from top*/
+            "", /*3 finger swipe from right*/
+            "", /*3 finger swipe from left*/
             "", /*3 finger swipe down*/
             "", /*3 finger swipe up*/
             "xdotool key super+shift+2", /*3 finger swipe right*/
             "xdotool key super+shift+1", /*3 finger swipe left*/
             "xbacklight -dec ", /*3 finger rotation left*/
             "xbacklight -inc ", /*3 finger rotation right*/
+            "", /*4 finger swipe from bottom*/
+            "", /*4 finger swipe from top*/
+            "", /*4 finger swipe from right*/
+            "", /*4 finger swipe from left*/
             "", /*4 finger swipe down*/
             "", /*4 finger swipe up*/
             "", /*4 finger swipe right*/
             "", /*4 finger swipe left*/
             "", /*4 finger rotation left*/
             "", /*4 finger rotation right*/
+            "", /*5 finger swipe from bottom*/
+            "", /*5 finger swipe from top*/
+            "", /*5 finger swipe from right*/
+            "", /*5 finger swipe from left*/
             "", /*5 finger swipe down*/
             "", /*5 finger swipe up*/
             "", /*5 finger swipe right*/
