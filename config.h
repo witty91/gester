@@ -46,8 +46,8 @@
             "", /*3 finger swipe up*/
             "xdotool key super+shift+2", /*3 finger swipe right*/
             "xdotool key super+shift+1", /*3 finger swipe left*/
-            "xbacklight -dec ", /*3 finger rotation left*/
-            "xbacklight -inc ", /*3 finger rotation right*/
+            "/home/christopher/bin/changebrightness ", /*3 finger rotation left*/
+            "/home/christopher/bin/changebrightness ", /*3 finger rotation right*/
             "", /*4 finger swipe from bottom*/
             "", /*4 finger swipe from top*/
             "", /*4 finger swipe from right*/
