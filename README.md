@@ -24,4 +24,4 @@ I took this idea from using [polybar](https://github.com/polybar/polybar), which
 to have my screen rotate, and just added a system call within that script to send the SIGUSR1 signal to gester.
 
 # plans for the future
-I do plan to add some more gestures in the future and am open to suggestions.
+I don't plan to add more gestures in the future,since I've noticed that everything I wanted is there, but I am open to suggestions.
