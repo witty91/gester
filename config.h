@@ -2,6 +2,7 @@
 #define CONFIG_H_INCLUDED
         /*path to the input event, need to be part of input group in order to read*/
         char devname[] = "/dev/input/by-id/usb-Wacom_Co._Ltd._Pen_and_multitouch_sensor-event-if00";
+	//char devname[] = "/dev/input/event12";
         /*path to accelerometer data*/
         std::string accelpath = "/sys/bus/iio/devices/"; //in there the program looks for a folder named iio:device0 or 1
         std::string xrawdata = "in_accel_x_raw"; // in iio:device* there should be these files with the respective data
@@ -24,10 +25,10 @@
         int offsetright = 10;
         /*an array of commands to use within the program*/
         char* commands[] = {
-            "onboard &", /*1 finger from bottom*/
+            "svkbd &", /*1 finger from bottom*/
             "dmenu_run &", /*1 finger from top*/
             "", /*1 finger from right*/
-            "stabbed &", /*1 finger from left*/
+            "stabbed youtube.com&", /*1 finger from left*/
             "", /*2 finger swipe down*/
             "", /*2 finger swipe up*/
             "xdotool key super+2", /*2 finger swipe right*/
@@ -38,8 +39,8 @@
             "", /*3 finger swipe up*/
             "xdotool key super+shift+2", /*3 finger swipe right*/
             "xdotool key super+shift+1", /*3 finger swipe left*/
-            "xbacklight -dec ", /*3 finger rotation left*/
-            "xbacklight -inc ", /*3 finger rotation right*/
+            "/home/christopher/bin/changebrightness ", /*3 finger rotation left*/
+            "/home/christopher/bin/changebrightness ", /*3 finger rotation right*/
             "", /*4 finger swipe down*/
             "", /*4 finger swipe up*/
             "", /*4 finger swipe right*/

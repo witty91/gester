@@ -23,7 +23,8 @@ void my_handler(int signum)
 
 
 int main(){
-        int device = open(devname, O_RDONLY);
+        printf("Opening device $s",devname);
+		int device = open(devname, O_RDONLY);
         struct input_event ev;
         /*holds information which finger is currently being tracked*/
         int finger = 0;
@@ -98,18 +99,18 @@ int main(){
 
             if(accelx < gthresh && accely < -gthresh){
                 orientation = 0; /* 0 is normal orientation */
-                //printf("Setting orientation to normal\n");
+                printf("Setting orientation to normal\n");
             }else if(accelx > gthresh && accely < gthresh){
                 orientation = 1; /* 1 is rotated right*/
-                //printf("Setting orientation to right\n");
+                printf("Setting orientation to right\n");
             }else if (accelx < gthresh && accely > gthresh){
                 orientation = 2; /* 2 is upside down*/
-                //printf("Setting orientation to upside down\n");
+                printf("Setting orientation to upside down\n");
             }else if (accelx < -gthresh && accely < gthresh){
                 orientation = 3; /* 3 is rotated left*/
-                //printf("Setting orientation to left\n");
+                printf("Setting orientation to left\n");
             }else{
-                //printf("could not find accelerometer data, setting orientation to normal\n");
+                printf("could not find accelerometer data, setting orientation to normal\n");
                 orientation = 0;
             }
 
@@ -382,7 +383,7 @@ int main(){
                             double xlastcom  = (x0last + x1last) / 2;
                             double ylastcom = (y0last + y1last) / 2;
                             double comdist = sqrt((xfirstcom - xlastcom)*(xfirstcom - xlastcom) + (yfirstcom - ylastcom)*(yfirstcom - ylastcom));
-                            //printf("comdist: %f\n",comdist);
+                            printf("comdist: %f\n",comdist);
                             double vec0xfirst = x0first - xfirstcom;
                             double vec0yfirst = y0first - yfirstcom;
                             double vec1xfirst = x1first - xfirstcom;
@@ -474,7 +475,7 @@ int main(){
                         else if(comdist < comdisttolerance){
                             printf("Three finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
-                                    std::string tmpcommand = commands[14] + std::to_string(abs(anglescaled));
+                                    std::string tmpcommand = commands[14] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }else{
                                     std::string tmpcommand = commands[15] + std::to_string(anglescaled);
