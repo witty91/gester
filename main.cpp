@@ -30,6 +30,8 @@ int main(){
         int finger = 0;
         /*holds information about the amount of fingers touching the screen*/
         int nfingers = 0;
+        /*fix rotations with wide spread fingers*/
+        int swipesuccess = 0;
         /*placeholder to help switching xmax and ymax*/
         int yrotmax = xmax;
         int xrotmax = ymax;
@@ -360,19 +362,19 @@ int main(){
                     if(nfingers == 1){
                         /*one finger screen edge gestures*/
                         if(y0first >= (ymax - offsetbottom) && finger0directionality < 1){
-                            printf("swipe from bottom!\n");
+                            printf("1 finger swipe from bottom edge!\n");
                             system(commands[0]);
                         }
                         if(y0first <= offsettop && finger0directionality < 1){
-                            printf("swipe from top!\n");
+                            printf("1 finger swipe from top edge!\n");
                             system(commands[1]);
                         }
                         if(x0first >= (xmax - offsetright) && finger0directionality > 1){
-                            printf("swipe from right!\n");
+                            printf("1 finger swipe from right edge!\n");
                             system(commands[2]);
                         }
                         if(x0first <= offsetleft && finger0directionality > 1){
-                            printf("swipe from left!\n");
+                            printf("1 finger swipe from left edge!\n");
                             system(commands[3]);
                         }
                     }
@@ -396,34 +398,55 @@ int main(){
                             double phi1 = atan2((vec1xfirst*vec1ylast - vec1yfirst*vec1xlast),(vec1xfirst*vec1xlast + vec1yfirst*vec1ylast))*radtoang;
                             int angleavg = round((phi0 + phi1) / 2);
                             int anglescaled = (angleavg / anglescaling) - (angleavg / anglescaling) % anglestepping ;
+                            //printf("phi0: %f phi1: %f angleavg: %i anglescaled: %i\n",phi0,phi1,angleavg,anglescaled);
                             /*conditions for 2 finger gestures*/
                         if((abs(x0len) > swipetolerance && abs(x1len) > swipetolerance) || (abs(y0len) > swipetolerance && abs(y1len) > swipetolerance)){
-
-                            if(finger0directionality < 1 && finger1directionality < 1 && y0last > y0first && y1last > y1first){
-                                printf("2 finger swipe down!\n");
+                            /*2 finger edge swipes*/
+                            if(y0first >= (ymax - offsetbottom) && y1first >= (ymax - offsetbottom) && finger0directionality < 1 && finger1directionality <1){
+                                printf("2 finger swipe from bottom edge!\n");
                                 system(commands[4]);
+                                swipesuccess = 1;
+                            }else if(y0first <= offsettop && y1first <= offsettop && finger0directionality < 1 && finger1directionality < 1){
+                                printf("2 finger swipe from top edge!\n");
+                                system(commands[5]);
+                                swipesuccess = 1;
+                            }else if(x0first >= (xmax - offsetright) && x1first >= (xmax - offsetright) && finger0directionality > 1 && finger1directionality > 1){
+                                printf("2 finger swipe from right edge!\n");
+                                system(commands[6]);
+                                swipesuccess = 1;
+                            }else if(x0first <= offsetleft && x1first <= offsetleft && finger0directionality > 1 && finger1directionality > 1){
+                                printf("2 finger swipe from left edge!\n");
+                                system(commands[7]);
+                                swipesuccess = 1;
+                            }else if(finger0directionality < 1 && finger1directionality < 1 && y0last > y0first && y1last > y1first){
+                                printf("2 finger swipe down!\n");
+                                system(commands[8]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality < 1 && finger1directionality < 1 && y0last < y0first && y1last < y1first){
                                 printf("2 finger swipe up!\n");
-                                system(commands[5]);
+                                system(commands[9]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality > 1 && finger1directionality > 1 && x0last > x0first && x1last > x1first){
                                 printf("2 finger swipe right!\n");
-                                system(commands[6]);
+                                system(commands[10]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality > 1 && finger1directionality > 1 && x0last < x0first && x1last < x1first){
                                 printf("2 finger swipe left!\n");
-                                system(commands[7]);
+                                system(commands[11]);
+                                swipesuccess = 1;
                             }
 
                         }
-                        else if(comdist < comdisttolerance){
+                        if(comdist < comdisttolerance && swipesuccess == 0){
                                 printf("Two finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                                 if(angleavg < 0){
-                                    std::string tmpcommand = commands[8] + std::to_string(anglescaled);
+                                    std::string tmpcommand = commands[12] + std::to_string(anglescaled);
 				    system(tmpcommand.c_str());
                                 }else{
-                                    std::string tmpcommand = commands[9] + std::to_string(anglescaled);
+                                    std::string tmpcommand = commands[13] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }
                         }
@@ -453,32 +476,53 @@ int main(){
                         double phi2 = atan2((vec2xfirst*vec2ylast - vec2yfirst*vec2xlast),(vec2xfirst*vec2xlast + vec2yfirst*vec2ylast))*radtoang;
                         int angleavg = round((phi0 + phi1 + phi2) / 3);
                         int anglescaled = (angleavg / anglescaling) - (angleavg / anglescaling) % anglestepping ;
+                        //printf("phi0: %f phi1: %f phi2: %f angleavg: %i anglescaled: %i\n",phi0,phi1,phi2,angleavg,anglescaled);
 
                         if(((abs(x0len) > swipetolerance && abs(x1len) > swipetolerance && abs(x2len) > swipetolerance) || (abs(y0len) > swipetolerance && abs(y1len) > swipetolerance && abs(y2len) > swipetolerance))){
-                            if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first){
+                            if(y0first >= (ymax - offsetbottom) && y1first >= (ymax - offsetbottom) && y2first >= (ymax-offsetbottom) && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1){
+                                printf("3 finger swipe from bottom edge!\n");
+                                system(commands[14]);
+                                swipesuccess = 1;
+                            }else if(y0first <= offsettop && y1first <= offsettop && y2first <= offsettop && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1){
+                                printf("3 finger swipe from top edge!\n");
+                                system(commands[15]);
+                                swipesuccess = 1;
+                            }else if(x0first >= (xmax - offsetright) && x1first >= (xmax - offsetright) && x2first >= (xmax - offsetright) && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1){
+                                printf("3 finger swipe from right edge!\n");
+                                system(commands[16]);
+                                swipesuccess = 1;
+                            }else if(x0first <= offsetleft && x1first <= offsetleft && x2first <= offsetleft && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1){
+                                printf("3 finger swipe from left edge!\n");
+                                system(commands[17]);
+                                swipesuccess = 1;
+                            }else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first){
                                 printf("3 finger swipe down!\n");
-                                system(commands[10]);
+                                system(commands[18]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && y0last < y0first && y1last < y1first && y2last < y2first){
                                 printf("3 finger swipe up!\n");
-                                system(commands[11]);
+                                system(commands[19]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first){
                                 printf("3 finger swipe right!\n");
-                                system(commands[12]);
+                                system(commands[20]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first){
                                 printf("3 finger swipe left!\n");
-                                system(commands[13]);
+                                system(commands[21]);
+                                swipesuccess = 1;
                             }
                         }
-                        else if(comdist < comdisttolerance){
+                        if(comdist < comdisttolerance && swipesuccess == 0){
                             printf("Three finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
                                     std::string tmpcommand = commands[14] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }else{
-                                    std::string tmpcommand = commands[15] + std::to_string(anglescaled);
+                                    std::string tmpcommand = commands[23] + std::to_string(anglescaled);
                                     system(tmpcommand.c_str());
                                 }
                         }
@@ -515,30 +559,50 @@ int main(){
                         int anglescaled = (angleavg / anglescaling) - (angleavg / anglescaling) % anglestepping ;
 
                         if((abs(x0len) > swipetolerance && abs(x1len) > swipetolerance && abs(x2len) > swipetolerance && abs(x3len) > swipetolerance) || (abs(y0len) > swipetolerance && abs(y1len) > swipetolerance && abs(y2len) > swipetolerance && abs(y3len) > swipetolerance)){
-                            if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            if(y0first >= (ymax - offsetbottom) && y1first >= (ymax - offsetbottom) && y2first >= (ymax - offsetbottom) && y3first >= (ymax - offsetbottom) && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1){
+                                printf("4 finger swipe from bottom edge!\n");
+                                system(commands[24]);
+                                swipesuccess = 1;
+                            }else if(y0first <= offsettop && y1first <= offsettop && y2first <= offsettop && y3first <= offsettop && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1){
+                                printf("4 finger swipe from top edge!\n");
+                                system(commands[25]);
+                                swipesuccess = 1;
+                            }else if(x0first >= (xmax - offsetright) && x1first >= (xmax - offsetright) && x2first >= (xmax - offsetright) && x3first >= (xmax - offsetright) && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1){
+                                printf("4 finger swipe from right edge!\n");
+                                system(commands[26]);
+                                swipesuccess = 1;
+                            }else if(x0first <= offsetleft && x1first <= offsetleft && x2first <= offsetleft && x3first <= offsetleft && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1){
+                                printf("4 finger swipe from left edge!\n");
+                                system(commands[27]);
+                                swipesuccess = 1;
+                            }else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
                                 printf("4 finger swipe down!\n");
-                                system(commands[16]);
+                                system(commands[28]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
                                 printf("4 finger swipe up!\n");
-                                system(commands[17]);
+                                system(commands[29]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first && x3last > x3first){
                                 printf("4 finger swipe right!\n");
-                                system(commands[18]);
+                                system(commands[30]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first && x3last < x3first){
                                 printf("4 finger swipe left!\n");
-                                system(commands[19]);
+                                system(commands[31]);
+                                swipesuccess = 1;
                             }
                         }
-                        else if(comdist < comdisttolerance){
+                        if(comdist < comdisttolerance && swipesuccess == 0){
                             printf("Four finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
-                                std::string tmpcommand = commands[20] + std::to_string(anglescaled);
+                                std::string tmpcommand = commands[32] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
                             }else{
-                                std::string tmpcommand = commands[21] + std::to_string(anglescaled);
+                                std::string tmpcommand = commands[33] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
                             }
                         }
@@ -580,30 +644,50 @@ int main(){
                         int anglescaled = (angleavg / anglescaling) - (angleavg / anglescaling) % anglestepping ;
 
                         if((abs(x0len) > swipetolerance && abs(x1len) > swipetolerance && abs(x2len) > swipetolerance && abs(x3len) > swipetolerance && abs(x4len) > swipetolerance) || (abs(y0len) > swipetolerance && abs(y1len) > swipetolerance && abs(y2len) > swipetolerance && abs(y3len) > swipetolerance && abs(y4len) > swipetolerance)){
-                            if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            if(y0first >= (ymax - offsetbottom) && y1first >= (ymax - offsetbottom) && y2first >= (ymax - offsetbottom) && y3first >= (ymax - offsetbottom) && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1){
+                                printf("5 finger swipe from bottom edge!\n");
+                                system(commands[34]);
+                                swipesuccess = 1;
+                            }else if(y0first <= offsettop && y1first <= offsettop && y2first <= offsettop && y3first <= offsettop && finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1){
+                                printf("5 finger swipe from top edge!\n");
+                                system(commands[35]);
+                                swipesuccess = 1;
+                            }else if(x0first >= (xmax - offsetright) && x1first >= (xmax - offsetright) && x2first >= (xmax - offsetright) && x3first >= (xmax - offsetright) && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1){
+                                printf("5 finger swipe from right edge!\n");
+                                system(commands[36]);
+                                swipesuccess = 1;
+                            }else if(x0first <= offsetleft && x1first <= offsetleft && x2first <= offsetleft && x3first <= offsetleft && finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1){
+                                printf("5 finger swipe from left edge!\n");
+                                system(commands[37]);
+                                swipesuccess = 1;
+                            }else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
                                 printf("5 finger swipe down!\n");
-                                system(commands[22]);
+                                system(commands[38]);
+                                swipesuccess = 1;
                             }
                             else if(finger0directionality < 1 && finger1directionality < 1 && finger2directionality < 1 && finger3directionality < 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
                                 printf("5 finger swipe up!\n");
-                                system(commands[23]);
+                                system(commands[39]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last > y0first && y1last > y1first && y2last > y2first && y3last > y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last > x0first && x1last > x1first && x2last > x2first && x3last > x3first){
                                 printf("5 finger swipe right!\n");
-                                system(commands[24]);
+                                system(commands[40]);
+                                swipesuccess = 1;
                             }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && y0last < y0first && y1last < y1first && y2last < y2first && y3last < y3first){
+                            else if(finger0directionality > 1 && finger1directionality > 1 && finger2directionality > 1 && finger3directionality > 1 && x0last < x0first && x1last < x1first && x2last < x2first && x3last < x3first){
                                 printf("5 finger swipe left!\n");
-                                system(commands[25]);
+                                system(commands[41]);
+                                swipesuccess = 1;
                             }
                         }
-                        else if(comdist < comdisttolerance){
+                        if(comdist < comdisttolerance && swipesuccess == 0){
                             printf("Five finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                             if(angleavg < 0){
-                                std::string tmpcommand = commands[26] + std::to_string(anglescaled);
+                                std::string tmpcommand = commands[42] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
                             }else{
-                                std::string tmpcommand = commands[27] + std::to_string(anglescaled);
+                                std::string tmpcommand = commands[43] + std::to_string(anglescaled);
                                 system(tmpcommand.c_str());
                             }
                         }
@@ -660,7 +744,7 @@ int main(){
                 finger4directionality = 0;
 
                 //printf("arrays after clear: %i %i %i %i %i\n",finger0x.size(),finger1x.size(),finger2x.size(),finger3x.size(),finger4x.size());
-
+                swipesuccess = 0;
                 nfingers = 0;
             }
         }
