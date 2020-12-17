@@ -18,6 +18,9 @@ Currently the following gestures have been implemented:
 * 2-5 finger swipes up, down, left and right
 * 2-5 finger rotations clockwise and counterclockwise
 
+# scripts
+The scripts directory now contains two scripts for using the rotational gestures to change brightness or volume in kde. Thanks to rhuhle!
+
 # screen orientation
 The accelerometer data will by default only be read once after startup to avoid too much file I/O, however if the program receives the SIGUSR1 signal, the accelerometer data will be reread.
 I took this idea from using [polybar](https://github.com/polybar/polybar), which also reloads in this way. I use [thinkpad-l380-yoga-scripts](https://github.com/ffejery/thinkpad-l380-yoga-scripts)
