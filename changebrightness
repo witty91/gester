@@ -1,0 +1,27 @@
+#!/bin/bash
+
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/bus
+
+if [ $1 -gt 0 ]
+then
+#  echo increasing by "$1" >> ~/bin/brightnesslog
+ END=$1
+ i=0
+ while [[ $i -lt $END ]]
+ do
+#     echo $i >> ~/bin/brightnesslog
+    qdbus org.kde.kglobalaccel /component/org_kde_powerdevil invokeShortcut "Increase Screen Brightness"
+    ((i = i + 5))
+ done
+else
+#  echo decreasing by "$1" >> ~/bin/brightnesslog
+ END=$1
+ i=0
+ while [[ $i -gt $END ]]
+#  echo decreasing by "$1" >> ~/bin/brightnesslog
+ do
+#     echo $i >> ~/bin/brightnesslog
+    qdbus org.kde.kglobalaccel /component/org_kde_powerdevil invokeShortcut "Decrease Screen Brightness"
+    ((i = i - 5))
+ done
+fi
