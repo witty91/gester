@@ -32,6 +32,8 @@ int main(){
         int nfingers = 0;
         /*fix rotations with wide spread fingers*/
         int swipesuccess = 0;
+        /*implement pinch*/
+        int pinchsuccess = 0;
         /*placeholder to help switching xmax and ymax*/
         int yrotmax = xmax;
         int xrotmax = ymax;
@@ -453,7 +455,19 @@ int main(){
                             }
 
                         }
-                        if(comdist < comdisttolerance && swipesuccess == 0){
+                        if( ((x0last - x1last) + (y0last - y1last)) - ((x0first - x1first) + (y0first - y1first))){
+                            double finger01distancestart = (x0first - x1first)*(x0first - x1first) + (y0first - y1first)*(y0first - y1first);
+                            double finger01distanceend = (x0last - x1last)*(x0last - x1last) + (y0last - y1last)*(y0last - y1last);
+                            double pinchratio = finger01distanceend / finger01distancestart ;
+                            if(pinchratio < 1){
+                                printf("2 finger pinch inward with ratio %f\n",pinchratio);
+                                pinchsuccess = 1;
+                            }else if(pinchratio > 1){
+                                printf("2 finger pinch outward with ratio %f\n",pinchratio);
+                                pinchsuccess = 1;
+                            }
+                        }
+                        if(comdist < comdisttolerance && swipesuccess == 0 && pinchsuccess == 0){
                                 printf("Two finger rotation with an angle of %i degree scaled to %i\n",angleavg,anglescaled);
                                 if(angleavg < 0){
                                     std::string tmpcommand = commands[16] + std::to_string(anglescaled);
