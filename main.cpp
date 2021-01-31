@@ -438,18 +438,15 @@ int main(){
                                 printf("2 finger swipe down!\n");
                                 system(commands[12]);
                                 swipesuccess = 1;
-                            }
-                            else if(finger0directionality < 1 && finger1directionality < 1 && y0last < y0first && y1last < y1first){
+                            }else if(finger0directionality < 1 && finger1directionality < 1 && y0last < y0first && y1last < y1first){
                                 printf("2 finger swipe up!\n");
                                 system(commands[13]);
                                 swipesuccess = 1;
-                            }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && x0last > x0first && x1last > x1first){
+                            }else if(finger0directionality > 1 && finger1directionality > 1 && x0last > x0first && x1last > x1first){
                                 printf("2 finger swipe right!\n");
                                 system(commands[14]);
                                 swipesuccess = 1;
-                            }
-                            else if(finger0directionality > 1 && finger1directionality > 1 && x0last < x0first && x1last < x1first){
+                            }else if(finger0directionality > 1 && finger1directionality > 1 && x0last < x0first && x1last < x1first){
                                 printf("2 finger swipe left!\n");
                                 system(commands[15]);
                                 swipesuccess = 1;
