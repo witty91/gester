@@ -29,7 +29,11 @@
             "dmenu_run &", /*1 finger from top*/
             "", /*1 finger from right*/
             "stabbed &", /*1 finger from left*/
-            "", /*2 finger swipe from bottom*/
+            "pkill svkbd", /*1 finger towards bottom*/
+            "", /*1 finger towards top*/
+            "", /*1 finger towards right*/
+            "", /*1 finger towards left*/
+			"", /*2 finger swipe from bottom*/
             "", /*2 finger swipe from top*/
             "", /*2 finger swipe from right*/
             "", /*2 finger swipe from left*/
